@@ -14,6 +14,8 @@ namespace LoveShop.Models
 
 		[Column("price")] public decimal Price { get; set; }
 
+		public ICollection<ProductImageAddress> ProductImageAddresses { get; init; } = [];
+
 		public ICollection<ProductCategory> ProductCategories { get; init; } = [];
 
 		public ICollection<ProductInCart> ProductInCarts { get; init; } = [];
@@ -27,6 +29,7 @@ namespace LoveShop.Models
 				Name,
 				Description ?? string.Empty,
 				Price,
+				ProductImageAddresses.Select(productImageAddress => productImageAddress.Address).ToArray(),
 				ProductCategories.Select(pc => pc.CategoryId).ToArray(),
 				RowVersion);
 		}

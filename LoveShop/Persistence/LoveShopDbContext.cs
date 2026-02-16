@@ -18,6 +18,7 @@ namespace LoveShop.Persistence
 		public DbSet<Supplier> Suppliers { get; init; }
 		public DbSet<Order> Orders { get; init; }
 		public DbSet<OrderItem> OrderItems { get; init; }
+		public DbSet<ProductImageAddress> ProductImageAddress { get; init; }
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
@@ -39,6 +40,7 @@ namespace LoveShop.Persistence
 			modelBuilder.ApplyConfiguration(new SupplierConfiguration());
 			modelBuilder.ApplyConfiguration(new OrderConfiguration());
 			modelBuilder.ApplyConfiguration(new OrderItemConfiguration());
+			modelBuilder.ApplyConfiguration(new ProductImageAddressConfiguration());
 		}
 	}
 }

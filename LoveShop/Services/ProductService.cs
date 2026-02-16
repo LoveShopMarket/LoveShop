@@ -29,11 +29,13 @@ namespace LoveShop.Services
 
 			var query = _loveShopDbContext.Products.GetEntitiesAsync(filter, sort)
 				.Include(product => product.ProductCategories)
+				.Include(product => product.ProductImageAddresses)
 				.Select(product => new ProductDTO(
 					product.Id,
 					product.Name,
 					product.Description ?? string.Empty,
 					product.Price,
+					product.ProductImageAddresses.Select(imageAddress => imageAddress.Address).ToArray(),
 					product.ProductCategories.Select(pc => pc.CategoryId).ToArray(),
 					product.RowVersion));
 
@@ -51,8 +53,16 @@ namespace LoveShop.Services
 		{
 			var query = _loveShopDbContext.Products
 				.Include(product => product.ProductCategories)
+				.Include(product => product.ProductImageAddresses)
 				.Where(condition)
-				.Select(product => product.ToDTO());
+				.Select(product => new ProductDTO(
+					product.Id,
+					product.Name,
+					product.Description ?? string.Empty,
+					product.Price,
+					product.ProductImageAddresses.Select(imageAddress => imageAddress.Address).ToArray(),
+					product.ProductCategories.Select(pc => pc.CategoryId).ToArray(),
+					product.RowVersion));
 
 			var item = await query.SingleOrDefaultAsync(cancellationToken);
 

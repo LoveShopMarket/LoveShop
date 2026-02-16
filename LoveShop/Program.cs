@@ -30,13 +30,19 @@ builder.Services
 builder.Services
 	.AddScoped<IGenericCrudService<Category, CategoryDTO, CategoryCreateDTO, CategoryUpdateDTO>, CategoryService>();
 
+builder.Services.AddScoped<IProductImageService, ProductImageService>();
+
 builder.Host.UseSerilog();
 
 builder.Services.AddDbContext<LoveShopDbContext>(opt =>
-	opt.UseNpgsql(builder.Configuration.GetConnectionString("Database")));
+	opt.UseNpgsql(
+		builder.Configuration.GetConnectionString("Database"),
+		x => x.MigrationsHistoryTable("public_schema_migrations", "migrations")));
 
 builder.Services.AddDbContext<IdentityDbContext>(opt =>
-	opt.UseNpgsql(builder.Configuration.GetConnectionString("Database")));
+	opt.UseNpgsql(
+		builder.Configuration.GetConnectionString("Database"),
+		x => x.MigrationsHistoryTable("identity_schema_migrations", "migrations")));
 
 builder.Services.AddAuthentication();
 

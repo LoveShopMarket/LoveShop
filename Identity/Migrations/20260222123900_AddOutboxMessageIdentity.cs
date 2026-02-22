@@ -4,10 +4,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace LoveShop.Migrations.IdentityDb
+namespace Identity.Migrations
 {
     /// <inheritdoc />
-    public partial class AddIdentityContext : Migration
+    public partial class AddOutboxMessageIdentity : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -54,6 +54,24 @@ namespace LoveShop.Migrations.IdentityDb
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OutboxMessages",
+                schema: "identity",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Type = table.Column<string>(type: "text", nullable: false),
+                    Content = table.Column<string>(type: "text", nullable: false),
+                    DeduplicationKey = table.Column<string>(type: "text", nullable: false),
+                    OccurredOnUtc = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    ProcessedOnUtc = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    Error = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OutboxMessages", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -216,6 +234,13 @@ namespace LoveShop.Migrations.IdentityDb
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OutboxMessages_DeduplicationKey",
+                schema: "identity",
+                table: "OutboxMessages",
+                column: "DeduplicationKey",
+                unique: true);
         }
 
         /// <inheritdoc />
@@ -239,6 +264,10 @@ namespace LoveShop.Migrations.IdentityDb
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens",
+                schema: "identity");
+
+            migrationBuilder.DropTable(
+                name: "OutboxMessages",
                 schema: "identity");
 
             migrationBuilder.DropTable(

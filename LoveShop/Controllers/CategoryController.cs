@@ -1,4 +1,5 @@
-﻿using LoveShop.DTOs.Category;
+﻿using Identity.Constants;
+using LoveShop.DTOs.Category;
 using LoveShop.Models;
 using LoveShop.Services.Contracts;
 using LoveShop.Shared;
@@ -45,6 +46,7 @@ namespace LoveShop.Controllers
 			return category is null ? NotFound() : Ok(category);
 		}
 
+		[Authorize(Policy = Policies.CanEditCategories)]
 		[HttpPost]
 		public async Task<ActionResult> CreateCategoryAsync(
 			[FromBody] CategoryCreateDTO categoryCreateDTO,
@@ -55,6 +57,7 @@ namespace LoveShop.Controllers
 			return Created();
 		}
 
+		[Authorize(Policy = Policies.CanEditCategories)]
 		[HttpPut]
 		public async Task<ActionResult> UpdateCategoryAsync(
 			[FromBody] CategoryUpdateDTO categoryUpdateDTO,
@@ -65,6 +68,7 @@ namespace LoveShop.Controllers
 			return Ok(updatedCategory);
 		}
 
+		[Authorize(Policy = Policies.CanRemoveCategories)]
 		[HttpDelete("{id:guid}")]
 		public async Task<ActionResult> DeleteCategoryAsync(
 			Guid id,

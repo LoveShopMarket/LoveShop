@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace LoveShop.Models
+namespace Identity.Models
 {
 	public class Role : IdentityRole<Guid>;
 }

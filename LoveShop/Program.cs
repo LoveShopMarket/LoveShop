@@ -1,10 +1,13 @@
+using Identity;
+using Identity.Constants;
+using Identity.Models;
+using Identity.Persistence;
 using LoveShop.DTOs.Category;
 using LoveShop.DTOs.Product;
 using LoveShop.Models;
 using LoveShop.Persistence;
 using LoveShop.Services;
 using LoveShop.Services.Contracts;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
@@ -32,35 +35,16 @@ builder.Services
 
 builder.Host.UseSerilog();
 
+string? connectionString = builder.Configuration.GetConnectionString("Database");
+
 builder.Services.AddDbContext<LoveShopDbContext>(opt =>
-	opt.UseNpgsql(builder.Configuration.GetConnectionString("Database")));
+	opt.UseNpgsql(connectionString));
 
-builder.Services.AddDbContext<IdentityDbContext>(opt =>
-	opt.UseNpgsql(builder.Configuration.GetConnectionString("Database")));
-
-builder.Services.AddAuthentication();
-
-builder.Services
-	.AddIdentityCore<User>(options =>
-	{
-		options.User.RequireUniqueEmail = true;
-
-		options.Password.RequireDigit = false;
-		options.Password.RequireLowercase = false;
-		options.Password.RequireUppercase = false;
-		options.Password.RequireNonAlphanumeric = false;
-	})
-	.AddEntityFrameworkStores<IdentityDbContext>()
-	.AddDefaultTokenProviders();
+builder.Services.AddIdentity(connectionString);
 
 builder.Services.AddIdentityApiEndpoints<User>();
 
 var app = builder.Build();
-
-if (app.Environment.IsDevelopment())
-{
-	app.MapOpenApi();
-}
 
 app.UseHttpsRedirection();
 
@@ -68,7 +52,14 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
-app.MapIdentityApi<User>();
+if (app.Environment.IsDevelopment())
+{
+	app.MapOpenApi()
+		.RequireAuthorization(Policies.RequireAdminRights);
+}
+
+app.MapGroup("api/Identity")
+	.MapIdentityApi<User>();
 
 app.MapControllers();
 
@@ -77,7 +68,7 @@ using (var scope = app.Services.CreateScope())
 	var dbContext = scope.ServiceProvider.GetRequiredService<LoveShopDbContext>();
 	dbContext.Database.Migrate();
 
-	var identityDbContext = scope.ServiceProvider.GetRequiredService<IdentityDbContext>();
+	var identityDbContext = scope.ServiceProvider.GetRequiredService<LoveShopIdentityDbContext>();
 	identityDbContext.Database.Migrate();
 }
 

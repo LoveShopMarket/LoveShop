@@ -4,5 +4,6 @@
         <File Path="docker-compose.dev.yaml" />
         <File Path="docker-compose.yaml" />
     </Folder>
+    <Project Path="Identity/Identity.csproj" />
     <Project Path="LoveShop/LoveShop.csproj" />
 </Solution>

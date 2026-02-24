@@ -1,5 +1,7 @@
-﻿using Identity.Models;
+﻿using Identity.Constants;
+using Identity.Models;
 using Identity.Persistence;
+using System.Text.Json;
 
 namespace Identity.Services
 {
@@ -20,8 +22,8 @@ namespace Identity.Services
 			{
 				OccurredOnUtc = utcNow,
 				DeduplicationKey = $"user.id:{user.Id}",
-				Type = "user.confirmation.request",
-				Content = user.ToString()
+				Type = OutboxMessageTypes.UserConfirmationRequest,
+				Content = JsonSerializer.Serialize(user)
 			};
 			await _loveShopIdentityDbContext.OutboxMessages.AddAsync(outboxMessage, cancellationToken);
 		}

@@ -11,5 +11,7 @@
 		public const string ProductAdmin = "ProductAdmin";
 
 		public const string CategoryAdmin = "CategoryAdmin";
+
+		public const string UserAdmin = "UserAdmin";
 	}
 }

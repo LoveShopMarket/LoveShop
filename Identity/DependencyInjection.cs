@@ -37,6 +37,9 @@ namespace Identity
 						policy => policy.RequireRole(Roles.CategoryAdmin));
 					options.AddPolicy(Policies.CanRemoveCategories,
 						policy => policy.RequireRole(Roles.CategoryAdmin));
+
+					options.AddPolicy(Policies.CanManageUsers,
+						policy => policy.RequireRole(Roles.UserAdmin));
 				})
 				.AddIdentityCore<User>(options =>
 				{

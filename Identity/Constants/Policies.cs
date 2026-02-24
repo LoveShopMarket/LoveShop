@@ -13,5 +13,7 @@
 		public const string CanEditCategories = "CanEditCategories";
 
 		public const string CanRemoveCategories = "CanRemoveCategories";
+
+		public const string CanManageUsers = "CanManageUsers";
 	}
 }

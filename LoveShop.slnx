@@ -3,6 +3,7 @@
         <File Path=".editorconfig" />
         <File Path="docker-compose.dev.yaml" />
         <File Path="docker-compose.yaml" />
+        <File Path="Makefile" />
     </Folder>
     <Project Path="Identity/Identity.csproj" />
     <Project Path="LoveShop/LoveShop.csproj" />

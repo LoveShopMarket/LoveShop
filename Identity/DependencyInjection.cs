@@ -60,6 +60,8 @@ namespace Identity
 			services.AddScoped<IUserConfirmationService, UserConfirmationService>();
 			services.AddSingleton<IAuthorizationHandler, SuperAdminAuthorizationHandler>();
 
+			services.AddControllers();
+
 			return services;
 		}
 	}

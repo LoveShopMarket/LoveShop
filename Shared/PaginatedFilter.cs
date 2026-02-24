@@ -1,4 +1,4 @@
-﻿namespace LoveShop.Shared
+﻿namespace Shared
 {
 	public sealed record PaginatedFilter<T>(
 		int PageNumber,

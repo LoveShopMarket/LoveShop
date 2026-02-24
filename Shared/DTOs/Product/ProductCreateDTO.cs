@@ -1,4 +1,4 @@
-﻿namespace LoveShop.DTOs.Product
+﻿namespace Shared.DTOs.Product
 {
 	public sealed record ProductCreateDTO(
 		string Name,

@@ -1,6 +1,6 @@
 using System.Linq.Expressions;
 
-namespace LoveShop.Shared
+namespace Shared
 {
 	public sealed record Filter<T>(
 		PaginatedFilter<T> PaginatedFilter,

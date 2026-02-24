@@ -1,4 +1,4 @@
-﻿namespace LoveShop.DTOs.Category
+﻿namespace Shared.DTOs.Category
 {
 	public sealed record CategoryUpdateDTO(
 		Guid Id,

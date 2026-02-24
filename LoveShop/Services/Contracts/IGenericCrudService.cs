@@ -1,4 +1,4 @@
-﻿using LoveShop.Shared;
+﻿using Shared;
 using System.Linq.Expressions;
 
 namespace LoveShop.Services.Contracts

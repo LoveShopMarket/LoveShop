@@ -1,10 +1,10 @@
 ﻿using Identity.Constants;
-using LoveShop.DTOs.Category;
 using LoveShop.Models;
 using LoveShop.Services.Contracts;
-using LoveShop.Shared;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Shared;
+using Shared.DTOs.Category;
 
 namespace LoveShop.Controllers
 {

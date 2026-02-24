@@ -1,9 +1,9 @@
-namespace LoveShop.DTOs.Product
+﻿namespace Shared.DTOs.Product
 {
-	public sealed record ProductDTO(
+	public sealed record ProductUpdateDTO(
 		Guid Id,
 		string Name,
-		string Description,
+		string? Description,
 		decimal Price,
 		ICollection<Guid> CategoriesIds,
 		byte[] RowVersion);

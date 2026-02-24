@@ -6,4 +6,5 @@
     </Folder>
     <Project Path="Identity/Identity.csproj" />
     <Project Path="LoveShop/LoveShop.csproj" />
+    <Project Path="Shared/Shared.csproj" />
 </Solution>

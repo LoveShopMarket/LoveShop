@@ -1,5 +1,5 @@
-﻿using LoveShop.Shared;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Shared;
 
 namespace LoveShop.Extensions
 {

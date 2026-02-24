@@ -2,14 +2,14 @@ using Identity;
 using Identity.Constants;
 using Identity.Models;
 using Identity.Persistence;
-using LoveShop.DTOs.Category;
-using LoveShop.DTOs.Product;
 using LoveShop.Models;
 using LoveShop.Persistence;
 using LoveShop.Services;
 using LoveShop.Services.Contracts;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
+using Shared.DTOs.Category;
+using Shared.DTOs.Product;
 
 var builder = WebApplication.CreateBuilder(args);
 

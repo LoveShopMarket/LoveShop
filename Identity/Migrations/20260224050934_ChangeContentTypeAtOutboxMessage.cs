@@ -47,8 +47,7 @@ namespace Identity.Migrations
                 table: "OutboxMessages",
                 type: "jsonb",
                 nullable: false,
-                oldClrType: typeof(string),
-                oldType: "text");
+                oldClrType: typeof(string));
         }
 
         /// <inheritdoc />

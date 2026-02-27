@@ -2,6 +2,7 @@ using Identity;
 using Identity.Constants;
 using Identity.Models;
 using Identity.Persistence;
+using LoveShop.Handlers;
 using LoveShop.Models;
 using LoveShop.Persistence;
 using LoveShop.Services;
@@ -12,6 +13,10 @@ using Shared.DTOs.Category;
 using Shared.DTOs.Product;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+
+builder.Services.AddProblemDetails();
 
 builder.Services.AddCors(options =>
 {
@@ -45,6 +50,8 @@ builder.Services.AddIdentity(connectionString);
 builder.Services.AddIdentityApiEndpoints<User>();
 
 var app = builder.Build();
+
+app.UseExceptionHandler();
 
 app.UseHttpsRedirection();
 

@@ -1,5 +1,6 @@
 using LoveShop.DTOs.Category;
 using LoveShop.DTOs.Product;
+using LoveShop.Handlers;
 using LoveShop.Models;
 using LoveShop.Persistence;
 using LoveShop.Services;
@@ -9,6 +10,10 @@ using Microsoft.EntityFrameworkCore;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+
+builder.Services.AddProblemDetails();
 
 builder.Services.AddCors(options =>
 {
@@ -61,6 +66,8 @@ if (app.Environment.IsDevelopment())
 {
 	app.MapOpenApi();
 }
+
+app.UseExceptionHandler();
 
 app.UseHttpsRedirection();
 

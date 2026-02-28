@@ -1,9 +1,7 @@
 ﻿using Identity.Constants;
-using Identity.Mappings;
 using Identity.Models;
 using Identity.Persistence;
 using Microsoft.EntityFrameworkCore;
-using Shared.DTOs;
 using Shared.DTOs.OutboxMessage;
 using System.Text.Json;
 
@@ -18,16 +16,16 @@ namespace Identity.Services
 			_loveShopIdentityDbContext = loveShopIdentityDbContext;
 		}
 
-		public async Task AddConfirmationRequestAsync(UserDTO userDTO, CancellationToken cancellationToken = default)
+		public async Task AddConfirmationRequestAsync(User user, CancellationToken cancellationToken = default)
 		{
 			var utcNow = DateTime.UtcNow;
 
 			var outboxMessage = new OutboxMessage
 			{
 				OccurredOnUtc = utcNow,
-				DeduplicationKey = $"{OutboxMessageDeduplicationKeys.UserId}:{userDTO.Id}",
+				DeduplicationKey = $"user.id:{user.Id}",
 				Type = OutboxMessageTypes.UserConfirmationRequest,
-				Content = JsonSerializer.Serialize(userDTO)
+				Content = JsonSerializer.Serialize(user)
 			};
 			await _loveShopIdentityDbContext.OutboxMessages.AddAsync(outboxMessage, cancellationToken);
 		}
@@ -42,27 +40,6 @@ namespace Identity.Services
 				.ToListAsync(cancellationToken);
 
 			return confirmationRequests;
-		}
-
-		public async Task ProcessUserConfirmationRequestAsync(Guid id, CancellationToken cancellationToken = default)
-		{
-			var confirmationRequest = await _loveShopIdentityDbContext.OutboxMessages
-				.SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
-
-			if (confirmationRequest is not null)
-			{
-				var userDTO = JsonSerializer.Deserialize<UserDTO>(confirmationRequest.Content)!;
-				var user = await _loveShopIdentityDbContext.Users.SingleOrDefaultAsync(
-					x => x.Id == userDTO.Id, cancellationToken);
-				if (user is not null)
-				{
-					user.EmailConfirmed = true;
-
-					confirmationRequest.ProcessedOnUtc = DateTime.UtcNow;
-
-					await _loveShopIdentityDbContext.SaveChangesAsync(cancellationToken);
-				}
-			}
 		}
 	}
 }

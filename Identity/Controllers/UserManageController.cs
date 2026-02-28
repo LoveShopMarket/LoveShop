@@ -27,5 +27,12 @@ namespace Identity.Controllers
 
 			return Ok(confirmationRequests);
 		}
+
+		public async Task<ActionResult<bool>> ProcessUserConfirmationRequests(Guid id,
+			CancellationToken cancellationToken = default)
+		{
+			await _userConfirmationService.ProcessUserConfirmationRequestAsync(id, cancellationToken);
+			return Ok();
+		}
 	}
 }

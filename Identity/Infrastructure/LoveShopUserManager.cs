@@ -1,4 +1,5 @@
-﻿using Identity.Models;
+﻿using Identity.Mappings;
+using Identity.Models;
 using Identity.Persistence;
 using Identity.Services;
 using Microsoft.AspNetCore.Identity;
@@ -36,7 +37,7 @@ namespace Identity.Infrastructure
 					return identityResult;
 				}
 
-				await _userConfirmationService.AddConfirmationRequestAsync(user);
+				await _userConfirmationService.AddConfirmationRequestAsync(user.ToDTO());
 				await _loveShopIdentityDbContext.SaveChangesAsync();
 
 				await transaction.CommitAsync();

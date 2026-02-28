@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Shared.DTOs.OutboxMessage;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -16,20 +15,8 @@ namespace Identity.Models
 		public required string Content { get; init; }
 		public required string DeduplicationKey { get; init; }
 		public required DateTime OccurredOnUtc { get; init; }
-		public DateTime? ProcessedOnUtc { get; init; }
-		public string? Error { get; init; }
-
-		public OutboxMessageDTO ToDTO()
-		{
-			return new OutboxMessageDTO(
-				Id,
-				Type,
-				Content,
-				DeduplicationKey,
-				OccurredOnUtc,
-				ProcessedOnUtc,
-				Error);
-		}
+		public DateTime? ProcessedOnUtc { get; set; }
+		public string? Error { get; set; }
 	}
 
 	public class OutboxMessageConfiguration : IEntityTypeConfiguration<OutboxMessage>

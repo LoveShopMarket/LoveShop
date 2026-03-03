@@ -21,9 +21,6 @@ jobs:
       with:
         dotnet-version: ${{ vars.DOTNET_VERSION }}
 
-    - name: Echo version
-      run: echo ${{ vars.DOTNET_VERSION }}
-
     - name: Restore dependencies
       run: dotnet restore
 

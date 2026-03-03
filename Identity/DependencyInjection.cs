@@ -1,9 +1,7 @@
 ﻿using Identity.Constants;
 using Identity.Handlers;
-using Identity.Infrastructure;
 using Identity.Models;
 using Identity.Persistence;
-using Identity.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -56,8 +54,6 @@ namespace Identity
 				.AddEntityFrameworkStores<LoveShopIdentityDbContext>()
 				.AddDefaultTokenProviders();
 
-			services.AddScoped<UserManager<User>, LoveShopUserManager>();
-			services.AddScoped<IUserConfirmationService, UserConfirmationService>();
 			services.AddSingleton<IAuthorizationHandler, SuperAdminAuthorizationHandler>();
 
 			services.AddControllers();

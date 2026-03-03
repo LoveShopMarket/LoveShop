@@ -6,8 +6,6 @@ namespace Identity.Persistence
 {
 	public class LoveShopIdentityDbContext : IdentityDbContext<User, Role, Guid>
 	{
-		public DbSet<OutboxMessage> OutboxMessages { get; set; }
-
 		public LoveShopIdentityDbContext(DbContextOptions<LoveShopIdentityDbContext> options) : base(options)
 		{
 		}
@@ -18,7 +16,6 @@ namespace Identity.Persistence
 
 			builder.HasDefaultSchema("identity");
 
-			builder.ApplyConfiguration(new OutboxMessageConfiguration());
 		}
 	}
 }

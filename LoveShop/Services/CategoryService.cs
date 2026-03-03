@@ -1,10 +1,10 @@
-﻿using LoveShop.DTOs.Category;
-using LoveShop.Extensions;
+﻿using LoveShop.Extensions;
 using LoveShop.Models;
 using LoveShop.Persistence;
 using LoveShop.Services.Contracts;
-using LoveShop.Shared;
 using Microsoft.EntityFrameworkCore;
+using Shared;
+using Shared.DTOs.Category;
 using System.Linq.Expressions;
 
 namespace LoveShop.Services

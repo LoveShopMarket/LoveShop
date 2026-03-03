@@ -1,9 +1,10 @@
-using LoveShop.DTOs.Product;
+using Identity.Constants;
 using LoveShop.Models;
 using LoveShop.Services.Contracts;
-using LoveShop.Shared;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Shared;
+using Shared.DTOs.Product;
 
 namespace LoveShop.Controllers
 {
@@ -44,6 +45,7 @@ namespace LoveShop.Controllers
 			return product is null ? NotFound() : Ok(product);
 		}
 
+		[Authorize(Policy = Policies.CanEditProducts)]
 		[HttpPost]
 		public async Task<ActionResult> CreateProductAsync(
 			[FromBody] ProductCreateDTO productDTO,
@@ -54,6 +56,7 @@ namespace LoveShop.Controllers
 			return Created();
 		}
 
+		[Authorize(Policy = Policies.CanEditProducts)]
 		[HttpPut]
 		public async Task<ActionResult> UpdateCategoryAsync(
 			[FromBody] ProductUpdateDTO productUpdateDTO,
@@ -64,6 +67,7 @@ namespace LoveShop.Controllers
 			return Ok(updatedCategory);
 		}
 
+		[Authorize(Policy = Policies.CanRemoveProducts)]
 		[HttpDelete("{id:guid}")]
 		public async Task<ActionResult> DeleteCategoryAsync(
 			Guid id,

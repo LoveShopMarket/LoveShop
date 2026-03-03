@@ -16,6 +16,7 @@ namespace Identity.Persistence
 
 			builder.HasDefaultSchema("identity");
 
+			builder.ApplyConfiguration(new UserConfiguration());
 		}
 	}
 }

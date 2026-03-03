@@ -43,7 +43,7 @@ namespace Identity
 				{
 					options.User.RequireUniqueEmail = true;
 
-					options.SignIn.RequireConfirmedEmail = true;
+					options.SignIn.RequireConfirmedAccount = true;
 
 					options.Password.RequireDigit = false;
 					options.Password.RequireLowercase = false;
@@ -52,8 +52,10 @@ namespace Identity
 				})
 				.AddRoles<Role>()
 				.AddEntityFrameworkStores<LoveShopIdentityDbContext>()
-				.AddDefaultTokenProviders();
+				.AddDefaultTokenProviders()
+				.AddUserConfirmation<UserConfirmation>();
 
+			services.AddScoped<IUserConfirmation<User>, UserConfirmation>();
 			services.AddSingleton<IAuthorizationHandler, SuperAdminAuthorizationHandler>();
 
 			services.AddControllers();

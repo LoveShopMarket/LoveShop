@@ -16,10 +16,10 @@ jobs:
       - name: Set up .NET
         uses: actions/setup-dotnet@v5
         with:
-          dotnet-version: ${{ github.base_env.DOTNET_VERSION }}
+          dotnet-version: ${{ github.env.base_env.DOTNET_VERSION }}
 
       - name: Echo version
-        run: echo ${{ github.base_env.DOTNET_VERSION }}
+        run: echo ${{ github.env.base_env.DOTNET_VERSION }}
 
       - name: Publish
         run: dotnet publish --configuration Release --output ./out

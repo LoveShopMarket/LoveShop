@@ -8,7 +8,7 @@ namespace LoveShop.Models
 	[Table("categories")]
 	public class Category : BaseEntity
 	{
-		[Column("name")] public string Name { get; set; } = null!;
+		[Column("name")] public required string Name { get; set; }
 
 		[Column("parent_category_id")]
 		public Guid? ParentCategoryId

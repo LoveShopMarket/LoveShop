@@ -8,12 +8,12 @@ namespace LoveShop.Models
 	[Table("suppliers")]
 	public partial class Supplier : BaseEntity
 	{
-		[Column("name")] public string Name { get; set; } = null!;
+		[Column("name")] public required string Name { get; set; }
 
-		[Column("email")] [EmailAddress] public string Email { get; set; } = null!;
+		[Column("email")] [EmailAddress] public required string Email { get; set; }
 
 		[Column("phone_number")]
-		public string PhoneNumber
+		public required string PhoneNumber
 		{
 			get;
 			init
@@ -26,7 +26,7 @@ namespace LoveShop.Models
 
 				field = value;
 			}
-		} = null!;
+		}
 
 		public ICollection<Order> Orders { get; init; } = [];
 

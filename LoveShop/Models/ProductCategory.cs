@@ -11,9 +11,9 @@ namespace LoveShop.Models
 
 		[Column("category_id")] public Guid CategoryId { get; set; }
 
-		public Product Product { get; set; } = null!;
+		public Product? Product { get; set; }
 
-		public Category Category { get; set; } = null!;
+		public Category? Category { get; set; }
 	}
 
 	public class ProductCategoryConfiguration : BaseEntityConfiguration<ProductCategory>

@@ -6,19 +6,13 @@ namespace LoveShop.Models
 {
 	public abstract class BaseEntity
 	{
-		protected BaseEntity()
-		{
-			RowVersion = new byte[20];
-		}
-
 		[Column("id")]
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public Guid Id { get; init; }
 
 		[Column("is_deleted")] public bool IsDeleted { get; set; } = false;
 
-		[Column("row_version")]
-		public byte[] RowVersion { get; set; } = null!;
+		[Column("row_version")] public byte[] RowVersion { get; set; } = new byte[20];
 	}
 
 	public abstract class BaseEntityConfiguration<T> : IEntityTypeConfiguration<T> where T : BaseEntity

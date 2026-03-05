@@ -18,16 +18,12 @@ namespace Identity.Controllers
 
 		private readonly UserManager<User> _userManager;
 
-		private readonly LoveShopIdentityDbContext _loveShopIdentityDbContext;
-
 		public UserManageController(
 			IUserConfirmationService userConfirmationService,
-			UserManager<User> userManager,
-			LoveShopIdentityDbContext loveShopIdentityDbContext)
+			UserManager<User> userManager)
 		{
 			_userConfirmationService = userConfirmationService;
 			_userManager = userManager;
-			_loveShopIdentityDbContext = loveShopIdentityDbContext;
 		}
 
 		[HttpPost("addRoles")]

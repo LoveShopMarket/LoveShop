@@ -38,12 +38,17 @@ builder.Services
 builder.Services
 	.AddScoped<IGenericCrudService<Category, CategoryDTO, CategoryCreateDTO, CategoryUpdateDTO>, CategoryService>();
 
+builder.Services.AddScoped<IConfigurationService, ConfigurationService>();
+
 builder.Host.UseSerilog();
 
 string? connectionString = builder.Configuration.GetConnectionString("Database");
 
 builder.Services.AddDbContext<LoveShopDbContext>(opt =>
 	opt.UseNpgsql(connectionString));
+
+builder.Services.AddDbContext<ConfigurationDbContext>(opt =>
+	opt.UseNpgsql(builder.Configuration.GetConnectionString("Database")));
 
 builder.Services.AddIdentity(connectionString);
 
@@ -77,6 +82,9 @@ using (var scope = app.Services.CreateScope())
 
 	var identityDbContext = scope.ServiceProvider.GetRequiredService<LoveShopIdentityDbContext>();
 	identityDbContext.Database.Migrate();
+
+	var settingsDbContext = scope.ServiceProvider.GetRequiredService<ConfigurationDbContext>();
+	settingsDbContext.Database.Migrate();
 }
 
 app.UseSerilogRequestLogging();

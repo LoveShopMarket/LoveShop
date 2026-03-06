@@ -9,7 +9,7 @@ namespace LoveShop.Models.ConfigurationSchema
 	[Table("settings")]
 	public class ConfigurationSetting
 	{
-		[Key] [MaxLength(150)] [Column("key")] public string Key { get; init; } = null!;
+		[Key] [MaxLength(150)] [Column("key")] public required string Key { get; init; }
 
 		[Column("value")] public JsonElement Value { get; set; }
 

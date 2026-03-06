@@ -6,7 +6,7 @@ namespace Identity.Models
 {
 	public class User : IdentityUser<Guid>
 	{
-		public UserApprovalStatus ApprovalStatus { get; set; } = null!;
+		public UserApprovalStatus ApprovalStatus { get; set; } = UserApprovalStatus.Pending;
 	}
 
 	public class UserConfiguration : IEntityTypeConfiguration<User>

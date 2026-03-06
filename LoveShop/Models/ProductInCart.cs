@@ -13,9 +13,9 @@ namespace LoveShop.Models
 
 		[Column("quantity")] public int Quantity { get; set; } = 1;
 
-		public Cart Cart { get; set; } = null!;
+		public Cart? Cart { get; set; }
 
-		public Product Product { get; set; } = null!;
+		public Product? Product { get; set; }
 	}
 
 	public class ProductInCartConfiguration : BaseEntityConfiguration<ProductInCart>

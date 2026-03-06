@@ -15,9 +15,9 @@ namespace LoveShop.Models
 
 		[Column("unit_price")] public decimal UnitPrice { get; set; }
 
-		public Order Order { get; set; } = null!;
+		public Order? Order { get; set; }
 
-		public Product Product { get; set; } = null!;
+		public Product? Product { get; set; }
 	}
 
 	public class OrderItemConfiguration : BaseEntityConfiguration<OrderItem>

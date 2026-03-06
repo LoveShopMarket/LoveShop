@@ -9,7 +9,7 @@ namespace LoveShop.Models
 	{
 		[Column("customer_id")] public Guid CustomerId { get; set; }
 
-		public Customer Customer { get; set; } = null!;
+		public Customer? Customer { get; set; }
 
 		public ICollection<ProductInCart> ProductsInCart { get; init; } = [];
 	}

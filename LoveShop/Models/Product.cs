@@ -8,7 +8,7 @@ namespace LoveShop.Models
 	[Table("products")]
 	public class Product : BaseEntity
 	{
-		[Column("name")] public string Name { get; set; } = null!;
+		[Column("name")] public required string Name { get; set; }
 
 		[Column("description")] public string? Description { get; set; }
 

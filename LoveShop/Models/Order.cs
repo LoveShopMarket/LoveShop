@@ -17,9 +17,9 @@ namespace LoveShop.Models
 
 		[Column("is_active")] public bool IsActive { get; set; } = true;
 
-		public Customer Customer { get; set; } = null!;
+		public Customer? Customer { get; set; }
 
-		public Supplier Supplier { get; set; } = null!;
+		public Supplier? Supplier { get; set; }
 
 		public ICollection<OrderItem> OrderItems { get; init; } = [];
 	}

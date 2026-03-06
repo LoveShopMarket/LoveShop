@@ -1,6 +1,6 @@
-﻿using LoveShop.DTOs.Product;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Shared.DTOs.Product;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LoveShop.Models

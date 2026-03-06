@@ -1,4 +1,4 @@
-﻿using LoveShop.Shared;
+﻿using Shared;
 
 namespace LoveShop.Extensions
 {
